@@ -10,13 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_31_104043) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_04_101920) do
+  create_table "aaceptances", force: :cascade do |t|
+    t.boolean "terms_of_service"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "call_backs", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "login"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -27,6 +54,45 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_104043) do
     t.datetime "updated_at", null: false
     t.string "status"
     t.index ["article_id"], name: "index_comments_on_article_id"
+  end
+
+  create_table "comparisions", force: :cascade do |t|
+    t.string "subdomain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "legacy_code"
+    t.string "name"
+    t.string "email"
+    t.integer "password"
+  end
+
+  create_table "finaltable", id: false, force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "user_id", null: false
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "my_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "index"
+  end
+
+  create_table "products_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "index"
+    t.integer "price"
   end
 
   add_foreign_key "comments", "articles"
